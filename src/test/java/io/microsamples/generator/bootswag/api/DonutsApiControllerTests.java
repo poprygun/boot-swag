@@ -19,9 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(MockitoJUnitRunner.class)
-/**
- * https://thepracticaldeveloper.com/2017/07/31/guide-spring-boot-controller-tests/
- */
 public class DonutsApiControllerTests {
 
     private MockMvc mvc;
@@ -41,7 +38,7 @@ public class DonutsApiControllerTests {
     public void canRetrieveByIdWhenExists() throws Exception {
 
         mvc.perform(
-                get("/donut")
+                get("/api/donut")
                         .accept(MediaType.APPLICATION_JSON))
 
                 .andExpect(status().isOk())
