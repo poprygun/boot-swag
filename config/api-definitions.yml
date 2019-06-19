@@ -10,7 +10,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "localhost:8081"
-basePath: "/v2"
+basePath: "/api"
 tags:
 - name: "bootswag"
   description: "All good guesses count"

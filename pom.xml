@@ -111,6 +111,8 @@
 						<configuration>
 							<inputSpec>config/api-definitions.yml</inputSpec>
 							<language>spring</language>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
 							<configOptions>
 								<library>spring-boot</library>
 								<invokerPackage>io.microsamples.generator.bootswag</invokerPackage>
