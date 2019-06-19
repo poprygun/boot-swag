@@ -27,7 +27,7 @@ public class DonutsApiControllerTests {
     private MockMvc mvc;
 
     @InjectMocks
-    private DonutsApiController donutsApiController;
+    private DesertController donutsApiController;
 
     @Before
     public void setup() {
@@ -41,7 +41,7 @@ public class DonutsApiControllerTests {
     public void canRetrieveByIdWhenExists() throws Exception {
 
         mvc.perform(
-                get("/donuts")
+                get("/donut")
                         .accept(MediaType.APPLICATION_JSON))
 
                 .andExpect(status().isOk())

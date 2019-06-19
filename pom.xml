@@ -120,7 +120,7 @@
 								<configPackage>io.microsamples.generator.config</configPackage>
 								<modelPackage>io.microsamples.generator.bootswag.model</modelPackage>
 								<apiPackage>io.microsamples.generator.bootswag.api</apiPackage>
-								<skipOverwrite>io.microsamples.generator.bootswag.api.DonutsApiController</skipOverwrite>
+								<skipOverwrite>io.microsamples.generator.bootswag.api.DesertController</skipOverwrite>
 								<serializableModel>true</serializableModel>
 								<dateLibrary>Joda</dateLibrary>
 								<title>DONUTZ</title>

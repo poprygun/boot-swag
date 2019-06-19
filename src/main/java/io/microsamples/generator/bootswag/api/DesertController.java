@@ -6,14 +6,20 @@ import org.jeasy.random.EasyRandom;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
 @Controller
-public class DonutsApiController implements DonutsApi {
+public class DesertController implements DonutApi {
 
     private EasyRandom easyRandom = new EasyRandom();
+
+    @Override
+    public ResponseEntity<Void> addDonut(@Valid Donut body) {
+        return null;
+    }
 
     @Override
     public ResponseEntity<List<Donut>> myDonuts() {
