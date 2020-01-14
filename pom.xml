@@ -28,45 +28,9 @@
         <swagger-annotations-version>1.5.22</swagger-annotations-version>
         <jackson-databind-nullable.version>0.2.1</jackson-databind-nullable.version>
         <joda-time.version>2.10.5</joda-time.version>
-        <feign.version>10.7.0</feign.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-joda</artifactId>
-            <version>2.10.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-httpclient</artifactId>
-            <version>${feign.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
-            <version>${feign.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>${feign.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-slf4j</artifactId>
-            <version>${feign.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign.form</groupId>
-            <artifactId>feign-form</artifactId>
-            <version>3.8.0</version>
-        </dependency>
         <dependency>
             <groupId>org.jeasy</groupId>
             <artifactId>easy-random-core</artifactId>
@@ -171,32 +135,6 @@
                             <configOptions>
                                 <dateLibrary>joda</dateLibrary>
                             </configOptions>
-                            <apiPackage>io.microsamples.generator.bootswag.api</apiPackage>
-                            <modelPackage>io.microsamples.generator.bootswag.model</modelPackage>
-                            <invokerPackage>io.microsamples.generator.bootswag</invokerPackage>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>remote</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>config/api-definitions.yml</inputSpec>
-
-                            <!-- target to generate java client code -->
-                            <generatorName>java</generatorName>
-
-                            <!-- hint: if you want to generate java server code, e.g. based on Spring Boot,
-                                 you can use the following target: <generatorName>spring</generatorName> -->
-
-                            <!-- pass any necessary config options -->
-                            <configOptions>
-                                <dateLibrary>joda</dateLibrary>
-                            </configOptions>
-                            <library>feign</library>
-                            <output>${project.build.directory}/generated-sources/remote-openapi</output>
                             <apiPackage>io.microsamples.generator.bootswag.api</apiPackage>
                             <modelPackage>io.microsamples.generator.bootswag.model</modelPackage>
                             <invokerPackage>io.microsamples.generator.bootswag</invokerPackage>
