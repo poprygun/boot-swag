@@ -12,25 +12,25 @@ info:
 host: "localhost:8081"
 basePath: "/api"
 tags:
-- name: "bootswag"
-  description: "All good guesses count"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
+  - name: "bootswag"
+    description: "All good guesses count"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
 schemes:
-- "http"
+  - "http"
 paths:
   /donut:
     get:
       tags:
-      - "desert-controller"
+        - "desert-controller"
       summary: "Available Donuts"
       description: "All generated donuts returned."
       operationId: "myDonuts"
       consumes:
-      - "*/*"
+        - "*/*"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         200:
           description: "successful operation"
