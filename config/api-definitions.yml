@@ -1,115 +1,109 @@
-swagger: "2.0"
+openapi: 3.0.1
 info:
-  description: "This is a sample API Server."
-  version: "1.0.0"
-  title: "Boot-Swag"
-  termsOfService: "http://guesser.io/terms/"
+  title: Boot-Swag
+  description: This is a sample API Server.
+  termsOfService: http://guesser.io/terms/
   contact:
-    email: "apiteam@pivotal.io"
+    email: apiteam@pivotal.io
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "localhost:8081"
-basePath: "/api"
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8081/api
 tags:
-  - name: "bootswag"
-    description: "All good guesses count"
+  - name: bootswag
+    description: All good guesses count
     externalDocs:
-      description: "Find out more"
-      url: "http://swagger.io"
-schemes:
-  - "http"
+      description: Find out more
+      url: http://swagger.io
 paths:
   /donut:
     get:
       tags:
-        - "desert-controller"
-      summary: "Available Donuts"
-      description: "All generated donuts returned."
-      operationId: "myDonuts"
-      consumes:
-        - "*/*"
-      produces:
-        - "application/json"
+        - desert-controller
+      summary: Available Donuts
+      description: All generated donuts returned.
+      operationId: myDonuts
       responses:
         200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Donut"
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Donut'
         400:
-          description: "Invalid status value"
+          description: Invalid status value
+          content: {}
     post:
       tags:
-        - "desert-controller"
-      summary: "Add a new donut"
-      description: ""
-      operationId: "addDonut"
-      consumes:
-        - "application/json"
-        - "application/xml"
-      produces:
-        - "application/xml"
-        - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Donut object that needs to be added"
-          required: true
-          schema:
-            $ref: "#/definitions/Donut"
+        - desert-controller
+      summary: Add a new donut
+      operationId: addDonut
+      requestBody:
+        description: Donut object that needs to be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Donut'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Donut'
+        required: true
       responses:
         405:
-          description: "Invalid input"
+          description: Invalid input
+          content: {}
+      x-codegen-request-body-name: body
   /maincourse:
     get:
       tags:
-        - "maincourse-controller"
-      summary: "Available maincourse"
-      description: "All generated maincourse returned."
-      operationId: "myMaincourse"
-      consumes:
-        - "*/*"
-      produces:
-        - "application/json"
+        - maincourse-controller
+      summary: Available maincourse
+      description: All generated maincourse returned.
+      operationId: myMaincourse
       responses:
         200:
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Maincourse"
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Maincourse'
         400:
-          description: "Invalid status value"
-definitions:
-  Donut:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      size:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Donut"
-  Maincourse:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      size:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Maincourse"
-
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+          description: Invalid status value
+          content: {}
+components:
+  schemas:
+    Donut:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Donut
+    Maincourse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int64
+        name:
+          type: string
+      xml:
+        name: Maincourse
