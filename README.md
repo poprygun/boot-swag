@@ -23,6 +23,43 @@ Execute to apply recipes
 ./mvnw rewrite:run
 ```
 
+Alternatively if you don't want to modify pom
+
+Make sure to add snapshot repository reference to `.m2/settings.xml` as plugin may depend on snapshot dependencies
+
+```xml
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>allow-snapshots</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <repositories>
+                <repository>
+                    <id>snapshots-repo</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+</settings>
+```
+
+```bash
+./mvnw -U org.openrewrite.maven:rewrite-maven-plugin:dryRun \
+  -Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-openapi:0.1.0-SNAPSHOT \
+  -Drewrite.activeRecipes=org.openrewrite.openapi.swagger.SwaggerToOpenAPI
+```
+
 ## To Dos
 
 [x] Remove swagger code generation - add generated classes to source tree
@@ -30,3 +67,7 @@ Execute to apply recipes
 [x] Switch to JDK 21
 
 [x] Add dependency on [modified version of rewrite-openapi](https://github.com/poprygun/rewrite-openapi)
+
+./mvnw -U org.openrewrite.maven:rewrite-maven-plugin:dryRun \
+-Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-openapi:0.1.0-SNAPSHOT \
+-Drewrite.activeRecipes=org.openrewrite.openapi.swagger.SwaggerToOpenAPI
