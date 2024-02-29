@@ -5,6 +5,7 @@
  */
 package io.microsamples.generator.bootswag.api;
 
+import com.bc.chcs.gcp.ToFind;
 import io.microsamples.generator.bootswag.model.Donut;
 import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,7 @@ public interface DonutApi {
         consumes = { "application/json", "application/xml" },
         method = RequestMethod.POST)
     default ResponseEntity<Void> addDonut(@ApiParam(value = "Donut object that needs to be added" ,required=true )  @Valid @RequestBody Donut body) {
+        ToFind toFind = new ToFind();
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }

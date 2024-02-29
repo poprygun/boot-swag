@@ -60,6 +60,14 @@ Make sure to add snapshot repository reference to `.m2/settings.xml` as plugin m
   -Drewrite.activeRecipes=org.openrewrite.openapi.swagger.SwaggerToOpenAPI
 ```
 
+## Search recipes to find source code types, annotations, etc
+
+Configuration is defined in rewrite.yml
+
+```bash
+./mvnw -U org.openrewrite.maven:rewrite-maven-plugin:run \
+  -Drewrite.activeRecipes=com.bc.openrewrite.sb.FindChcsDependencies
+```
 ## To Dos
 
 [x] Remove swagger code generation - add generated classes to source tree
@@ -67,7 +75,3 @@ Make sure to add snapshot repository reference to `.m2/settings.xml` as plugin m
 [x] Switch to JDK 21
 
 [x] Add dependency on [modified version of rewrite-openapi](https://github.com/poprygun/rewrite-openapi)
-
-./mvnw -U org.openrewrite.maven:rewrite-maven-plugin:dryRun \
--Drewrite.recipeArtifactCoordinates=org.openrewrite.recipe:rewrite-openapi:0.1.0-SNAPSHOT \
--Drewrite.activeRecipes=org.openrewrite.openapi.swagger.SwaggerToOpenAPI

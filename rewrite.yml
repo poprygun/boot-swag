@@ -1,0 +1,197 @@
+#
+# Copyright 2021 the original author or authors.
+# <p>
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# <p>
+# https://www.apache.org/licenses/LICENSE-2.0
+# <p>
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindChcsDependencies
+displayName: Find code unsuitable for the cloud
+description: Locate patterns that may cause problems in containerized cloud environments.
+recipeList:
+  - com.bc.openrewrite.sb.FindMask
+  - com.bc.openrewrite.sb.FindSecurity
+  - com.bc.openrewrite.sb.FindRest
+  - com.bc.openrewrite.sb.FindGcp
+  - com.bc.openrewrite.sb.FindSql
+  - com.bc.openrewrite.sb.FindCache
+  - com.bc.openrewrite.sb.FindSiem
+  - com.bc.openrewrite.sb.FindHealth
+  - com.bc.openrewrite.sb.FindKafka
+  - com.bc.openrewrite.sb.FindLogging
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindMask
+displayName: Uses of Mask
+description: Use of Mask is detected.
+tags:
+  - chcs
+  - chcs-mask
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.mask..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindSecurity
+displayName: Uses of Security
+description: Use of Security is detected.
+tags:
+  - chcs
+  - chcs-security
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.security..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindRest
+displayName: Uses of Rest
+description: Use of Rest is detected.
+tags:
+  - chcs
+  - chcs-rest
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.rest..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindGcp
+displayName: Uses of GCP
+description: Use of GCP is detected.
+tags:
+  - chcs
+  - chcs-gcp
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.gcp..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindSql
+displayName: Uses of SQL
+description: Use of SQL is detected.
+tags:
+  - chcs
+  - chcs-sql
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.sql..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindCache
+displayName: Uses of Cache
+description: Use of Cache is detected.
+tags:
+  - chcs
+  - chcs-cache
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.cache..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindSiem
+displayName: Uses of Siem
+description: Use of Siem is detected.
+tags:
+  - chcs
+  - chcs-siem
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.siem..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindHealth
+displayName: Uses of Health
+description: Use of Health is detected.
+tags:
+  - chcs
+  - chcs-health
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.health..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindKafka
+displayName: Uses of Kafka
+description: Use of Kafka is detected.
+tags:
+  - chcs
+  - chcs-kafka
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.kafka..*
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindLogging
+displayName: Uses of Logging
+description: Use of Logging is detected.
+tags:
+  - chcs
+  - chcs-logging
+recipeList:
+  - org.openrewrite.java.search.FindTypes:
+      fullyQualifiedTypeName: com.bc.chcs.logging..*
+---
+# Following configuration is for example
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindJavaBatchAnnotations
+displayName: Uses of Java Batch annotations
+description: Batch processing can include long running processes.
+tags:
+  - chcs-batchAnnotations
+recipeList:
+  - org.openrewrite.java.search.FindAnnotations:
+      annotationPattern: '@javax.batch..*'
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindFileIo
+displayName: Find uses of Java file IO
+description: Move to cloud friendly alternative or TKG.
+tags:
+  - chcs-fileIO
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: 'java.io.File *(..)'
+      matchOverrides: true
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindFileScheme
+displayName: Find uses of `file://` scheme in string literals
+description: Use backing service or use TKG.
+tags:
+  - chcs-fileSystem
+recipeList:
+  - org.openrewrite.java.search.FindLiterals:
+      pattern: 'file://'
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindUnhandledTermSignal
+displayName: Find unhandled TERM signals
+description: For containerization, the TERM signal must be handled.
+tags:
+  - chcs-handles-term
+recipeList:
+  - org.openrewrite.java.search.FindMethods:
+      methodPattern: 'java.lang.Runtime addShutdownHook(..)'
+      matchesOverrides: false
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.bc.openrewrite.sb.FindJks
+displayName: Find java key store files
+description: In a cloud environment, use a centralized keystore, such as Azure Key Vault or AWS Secrets Manager, to better secure sensitive information.
+tags:
+  - java
+  - jks
+  - keystore
+recipeList:
+  - org.openrewrite.FindSourceFiles:
+      filePattern: '**/*.jks'
