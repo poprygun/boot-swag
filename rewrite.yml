@@ -20,6 +20,7 @@ displayName: Upgrade OpenApi Dependencies
 description: Upgrade OpenApi Dependencies required by Spring Boot 3
 recipeList:
   - org.openrewrite.openapi.swagger.UpgradeOpenApiDependencies
+  - org.openrewrite.java.RemoveUnusedImports
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.openapi.swagger.UpgradeOpenApiDependencies
@@ -55,7 +56,6 @@ recipeList:
   - org.openrewrite.maven.RemoveDependency:
       groupId: io.springfox
       artifactId: springfox-swagger-ui
-  - org.openrewrite.maven.RemoveUnusedImports:
 
 
 
