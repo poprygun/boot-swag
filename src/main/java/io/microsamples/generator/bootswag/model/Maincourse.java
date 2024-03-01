@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Maincourse
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-23T09:40:01.114343-05:00[America/New_York]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-23T09:40:01.114343-05:00[America/New_York]")
 
 public class Maincourse   {
   @JsonProperty("id")

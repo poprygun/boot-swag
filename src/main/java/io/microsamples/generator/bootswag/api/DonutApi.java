@@ -11,15 +11,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-23T09:40:01.114343-05:00[America/New_York]")
+
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-23T09:40:01.114343-05:00[America/New_York]")
 
 @Validated
 @Api(value = "donut", description = "the donut API")
@@ -32,9 +33,8 @@ public interface DonutApi {
     @ApiOperation(value = "Add a new donut", nickname = "addDonut", notes = "", tags={ "desert-controller", })
     @ApiResponses(value = { 
         @ApiResponse(code = 405, message = "Invalid input") })
-    @RequestMapping(value = "/donut",
-        consumes = { "application/json", "application/xml" },
-        method = RequestMethod.POST)
+    @PostMapping(value = "/donut",
+        consumes = { "application/json", "application/xml" })
     default ResponseEntity<Void> addDonut(@ApiParam(value = "Donut object that needs to be added" ,required=true )  @Valid @RequestBody Donut body) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
@@ -45,9 +45,8 @@ public interface DonutApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Donut.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid status value") })
-    @RequestMapping(value = "/donut",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+    @GetMapping(value = "/donut",
+        produces = { "application/json" })
     default ResponseEntity<List<Donut>> myDonuts() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

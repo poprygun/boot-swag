@@ -14,13 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.List;
 import java.util.Optional;
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-23T09:40:01.114343-05:00[America/New_York]")
+
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-23T09:40:01.114343-05:00[America/New_York]")
 
 @Validated
 @Api(value = "maincourse", description = "the maincourse API")
@@ -34,9 +34,8 @@ public interface MaincourseApi {
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "successful operation", response = Maincourse.class, responseContainer = "List"),
         @ApiResponse(code = 400, message = "Invalid status value") })
-    @RequestMapping(value = "/maincourse",
-        produces = { "application/json" }, 
-        method = RequestMethod.GET)
+    @GetMapping(value = "/maincourse",
+        produces = { "application/json" })
     default ResponseEntity<List<Maincourse>> myMaincourse() {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

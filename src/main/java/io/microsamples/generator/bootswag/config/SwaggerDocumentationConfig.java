@@ -11,9 +11,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.paths.RelativePathProvider;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-06-19T07:30:04.586-04:00[America/New_York]")
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-06-19T07:30:04.586-04:00[America/New_York]")
 @Configuration
 public class SwaggerDocumentationConfig {
 
