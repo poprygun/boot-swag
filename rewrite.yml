@@ -19,8 +19,9 @@ name: com.bc.openrewrite.sb.OpenApiSpringBoot3Dependencies
 displayName: Upgrade OpenApi Dependencies
 description: Upgrade OpenApi Dependencies required by Spring Boot 3
 recipeList:
-  - org.openrewrite.openapi.swagger.UpgradeOpenApiDependencies
-  - org.openrewrite.java.RemoveUnusedImports
+  - org.openrewrite.openapi.swagger.RemoveLegacyAnnotations
+  - org.openrewrite.openapi.swagger.RemoveLegacyClazzes
+#  - org.openrewrite.openapi.swagger.UpgradeOpenApiDependencies
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: org.openrewrite.openapi.swagger.UpgradeOpenApiDependencies
@@ -42,9 +43,9 @@ recipeList:
       type: jar
       acceptTransitive: true
   - org.openrewrite.maven.AddDependency:
-      groupId: io.swagger.core.v3
-      artifactId: swagger-models
-      version: 2.2.20
+      groupId: org.springdoc
+      artifactId: springdoc-openapi-starter-webmvc-ui
+      version: 2.3.0
       type: jar
       acceptTransitive: true
   - org.openrewrite.maven.RemoveDependency:
@@ -56,8 +57,25 @@ recipeList:
   - org.openrewrite.maven.RemoveDependency:
       groupId: io.springfox
       artifactId: springfox-swagger-ui
-
-
+# Will be added by springdoc-openapi-starter-webmvc-ui
+  - org.openrewrite.maven.RemoveDependency:
+      groupId: io.swagger.core.v3
+      artifactId: swagger-core
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.openapi.swagger.RemoveLegacyAnnotations
+displayName: Remove legacy swagger annotations
+recipeList:
+  - org.openrewrite.java.RemoveAnnotation:
+      annotationPattern: '@springfox.documentation.swagger2.annotations.EnableSwagger2'
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.openapi.swagger.RemoveLegacyClazzes
+displayName: Remove Swagger Documentation Configurations
+description: Remove Swagger Documentation Configurations
+recipeList:
+  - org.openrewrite.openapi.swagger.RemoveClazzRecipe:
+      typePackage: "springfox\\.documentation(\\..+)?"
 
 
 
